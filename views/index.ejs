@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <title>INDEX</title>
+    <link rel="stylesheet" href="/index.css">
+    <style>
+      body{
+    background-image: url(protruding-squares.svg);
+}
+.border-3{
+  border-width: 3px !important;
+}
+.border-4{
+  border-width: 3px !important;
+}
+.border-4:hover{
+  border-width: 3px !important;
+  border-color: darkgray !important;
+}
+.read-content{
+font-size: large; font-weight: 500;
+}
+  
+    </style>
+</head>
+<body>
+
+  <%- include('base.ejs'); -%>
+
+      <center>
+        <div class="row mx-5">
+    <% posts.slice().reverse().forEach((post) => { %>
+        <div class="simple-space col-sm-12 col-md-6 col-lg-4 col-xl-4 ">
+          <a style="text-decoration: none;" class="text-dark" href="/post/<%= post.id %>" >
+            <div class="card h-100 border border-4">
+              <div class="card-body">
+                <div class="ratio ratio-16x9 w-75 my-4 border border-3 border-secondary rounded-lg" style="overflow:hidden"> <img loading="lazy" src="<%= post.img_url %>" alt="img URL not found"
+                  style="width:100%; height: fit-content; object-fit: cover;"></div>
+                <h3 ><%= Truncate(post.title, 50)%></h3>
+                <p class="date"> <%= post.post_date %></p>
+                <p class="card-text read-content"><%= Truncate(post.content, 200).replace(/<br\s*[\/]?>/gi, '\n') %></p>
+                </a>
+                
+                
+                <% if(verified) { %>
+
+                  <div class="btn-group mt-2">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Actions
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="dropdown-item" href="/edit/<%= post.id %>">Edit</a>
+                      <a class="dropdown-item" href="/delete/<%= post.id %>">Delete</a>
+                    </div>
+                  </div>
+                <% } %>
+
+
+              </div>
+            </div>
+        </div>
+
+    <% }); %>
+  </div>
+    </center>
+    <br>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.lblCountRed {
+    color: red;
+}
+
+.lblCountGreen {
+    color: green;
+}
+body{
+    background-image: url(protruding-squares.svg);
+}
